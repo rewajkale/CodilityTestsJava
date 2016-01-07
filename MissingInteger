@@ -32,7 +32,7 @@ import java.util.*;
 class Solution {
     public int solution(int[] A) {
         ArrayList<Integer> arr=new ArrayList<>();
-        int index=1;
+        int index;
         if((A.length==1)&&(A[0]==1))
             return 2;
         for(int i=1;i<=A.length;i++)
@@ -45,11 +45,8 @@ class Solution {
         for(int i=1;i<=A.length;i++)
         {
             if(arr.get(i-1)!=1)
-            {
-                index=i;
-                break;
-            }
+                return i;
         }
-        return index;
+        return A.length+1;
     }
 }
