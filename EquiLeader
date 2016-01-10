@@ -51,7 +51,7 @@ Solution:
 import java.util.*;
 class Solution {
     public int solution(int[] A) {
-        int count=0, tempCount=0, equi=0;
+        int countLead=0, tempCount=0, equi=0;
         Integer key=null;
         HashMap<Integer,Integer> h=new HashMap<>();
         if(A.length==1)
@@ -68,7 +68,7 @@ class Solution {
             if(h.get(i)>A.length/2)
             {
                 key=i;
-                count=h.get(i);
+                countLead=h.get(i);
                 break;
             }
         }
@@ -78,7 +78,7 @@ class Solution {
         {
             if(A[i]==key)
                 tempCount++;
-            if((tempCount>(i+1)/2)&&((count-tempCount)>(A.length-i-1)/2))
+            if((tempCount>(i+1)/2)&&((countLead-tempCount)>(A.length-i-1)/2))
                 equi++;
         }
         return equi;
