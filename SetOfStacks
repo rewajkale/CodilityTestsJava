@@ -1,0 +1,141 @@
+Set Of Stacks:
+
+public class SetofStacks {
+
+    public static void main(String[] args){
+
+        // Create SetStack
+        SetStacks setofStacks = new SetStacks(5);
+        setofStacks.push(1);
+        setofStacks.push(1);
+        setofStacks.push(1);
+        setofStacks.push(1);
+        setofStacks.push(1);
+        System.out.println(setofStacks.size());
+        setofStacks.push(2);
+        System.out.println(setofStacks.size());
+        setofStacks.pop();
+        System.out.println(setofStacks.size());
+
+    }
+
+    public static class SetStacks {
+
+        // Stack List
+        LinkedList<Stack> stackList;
+        // Stack Size
+        int maxStackSize;
+
+        /**
+         * Default constructor for SetStacks.
+         * @param maxSize The maximum size of a stack in the set of stacks.
+         */
+        public SetStacks(int maxSize){
+            // Initialize Variables
+            maxStackSize = maxSize;
+            stackList = new LinkedList<Stack>();
+        }
+
+        /**
+         * Pushes the integer input parameter into the set of stacks.
+         * @param numberToPush Integer containing the number to push into the stack.
+         */
+        public void push(int numberToPush){
+            // If the Head Stack is Full
+            if(stackList.size() == 0){
+                // Create a New Stack
+                Stack newStack = new Stack();
+                // Add Number to the New Stack
+                newStack.push(numberToPush);
+                // Add the New Stack to the Front of the Linked List
+                stackList.addFirst(newStack);
+            }
+            else if(stackList.getFirst().size() == maxStackSize){
+                // Create a New Stack
+                Stack newStack = new Stack();
+                // Add Number to the New Stack
+                newStack.push(numberToPush);
+                // Add the New Stack to the Front of the Linked List
+                stackList.addFirst(newStack);
+            }
+            // If the Head Stack is Not Full
+            else{
+                // Get the Head
+                Stack headStack = stackList.getFirst();
+                // Push Number to the Stack
+                headStack.push(numberToPush);
+                // Remove the Head of the LinkedList
+                stackList.removeFirst();
+                // Add New Head
+                stackList.addFirst(headStack);
+            }
+        }
+
+        /**
+         * Retrieves the top-most number in the set of stacks.
+         * @return Integer of the top-most number in the set of stacks.
+         */
+        public int pop(){
+            // If the Head Node is Empty, Remove it
+            if(stackList.getFirst().size() == 0){
+                stackList.removeFirst();
+            }
+            // Get the Head
+            Stack headStack = stackList.getFirst();
+            // Push Number to the Stack
+            int poppedNumber = headStack.pop();
+            // Remove the Head of the LinkedList
+            stackList.removeFirst();
+            // Add New Head
+            if(headStack.size() != 0) {
+                stackList.addFirst(headStack);
+            }
+            // Return
+            return poppedNumber;
+        }
+
+        /**
+         * Returns the size of the Set of Stacks.
+         * @return Integer for the number of stacks in the set of stacks.
+         */
+        public int size(){
+            // Return Data
+            return stackList.size();
+        }
+
+        private class Stack {
+
+            // Variables that Define the Stack
+            LinkedList<Integer> stackContent;
+
+            // Default Constructor
+            public Stack(){
+                // Initialize the Stack Variables
+                stackContent = new LinkedList<Integer>();
+            }
+
+            // Push to Stack
+            public void push(int pushValue){
+                // Push to the Front of the Linked List
+                stackContent.addFirst(pushValue);
+            }
+
+            // Pop From Stack
+            public int pop(){
+                // Pop the Top Value From the Stack
+                int returnVal = stackContent.getFirst();
+                stackContent.removeFirst();
+                return returnVal;
+            }
+
+            // Return Size of Stack
+            public int size(){
+                // Return the Size
+                return stackContent.size();
+            }
+
+        }
+
+    }
+
+}
