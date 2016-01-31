@@ -1,0 +1,39 @@
+Remove Duplicates From LinkedList:
+
+public static void removeDuplicate1(Node head){
+		Set<Integer> set = new HashSet<Integer>();
+		set.add(head.data);
+		Node previous = head;
+		Node current = previous.next;
+		while(current != null){
+			if(!set.contains(current.data)){
+				set.add(current.data);
+				previous = previous.next;
+				current = current.next;
+			}else{
+				System.out.println("Delete " + current.data);
+				current = current.next;
+				previous.next = current;
+			}
+		}
+	}
+	public static void removeDuplicate2(Node head){
+		Node previous = head;
+		Node current = head.next;
+		while(current != null){
+			Node runner = head;
+			while(!(runner == current)){
+				if(runner.data == current.data){
+					current = current.next;
+					previous.next = current;
+					break;
+				}
+				runner = runner.next;
+			}
+			if(runner == current ){
+				previous = previous.next;
+				current = current.next;
+			}
+			
+		}
+	}
