@@ -1,0 +1,49 @@
+Tower of Hanoi:
+
+In the classic problem of the Towers of Hanoi, you have 3 towers and N disks of
+different sizes which can slide onto any tower. The puzzle starts with disks sorted
+in ascending order of size from top to bottom (i.e., each disk sits on top of an
+even larger one). You have the following constraints:
+(1) Only one disk can be moved at a time.
+(2) A disk is slid off the top of one tower onto the next tower.
+(3) A disk can only be placed on top of a larger disk.
+Write a program to move the disks from the first tower to the last using stacks.
+
+public class three_4 extends Thread{
+	
+	public static void hanoi(int n,Stack<Integer> from,Stack<Integer> to,Stack<Integer> use)
+	{
+		
+		if(n==1)
+			to.push(from.pop());
+				
+		else
+			{
+				hanoi(n-1,from,use,to);
+				hanoi(1,from,to,use);
+				hanoi(n-1,use,to,from);
+			}
+	}
+
+	
+	public static void main(String[] args) {
+		
+		Stack<Integer> from=new Stack<>();
+		Stack<Integer> to=new Stack<>();
+		Stack<Integer> use=new Stack<>();
+		from.push(5);from.push(4);from.push(3);from.push(2);from.push(1);
+		from.push(1);from.push(1);from.push(1);from.push(1);from.push(1);
+		from.push(1);from.push(1);from.push(1);from.push(1);from.push(1);
+		from.push(1);from.push(1);from.push(1);from.push(1);from.push(1);
+		from.push(1);from.push(1);from.push(1);from.push(1);from.push(1);
+		System.out.println("Initial Stack : "+from);
+		System.out.println("In Progress.....");
+
+		hanoi(from.size(),from,to,use);
+		System.out.println("Done");
+
+		System.out.println("Final Stack :   "+to);
+		System.out.println("Initial Stack : "+from);
+
+	}
+}
