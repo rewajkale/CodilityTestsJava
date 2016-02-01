@@ -1,0 +1,51 @@
+Subtree of a tree:
+
+You have two very large binary trees: Tl, with millions of nodes, and T2, with
+hundreds of nodes. Create an algorithm to decide ifT2 is a subtree of Tl.
+A tree T2 is a subtree of Tl if there exists a node n in Tl such that the subtree of
+n is identical to T2. That is, if you cut off the tree at node n, the two trees would
+be identical.
+
+public class IsSubtree<T extends Comparable<T>> {
+ 
+/**
+ * Determine if t2 is a subtree of t1
+ * @param t1
+ * @param t2
+ * @return
+ */
+ public boolean isSubtree(BTNode<T> top1, BTNode<T> top2){
+ // Traverse t1 to find a node that matches t2
+ 
+ // Edge case
+ if(top1 == null || top2 == null){
+ return false;
+ }
+ 
+ // Base case: find a same node
+ else if(top1.data.compareTo(top2.data) == 0){
+ return isIdenticalTree(top1, top2);
+ }
+ // Recursion: keep looking
+ else{
+ return isSubtree(top1.left, top2) || isSubtree(top1.right, top2);
+ }
+ }
+ 
+ private boolean isIdenticalTree(BTNode<T> top1, BTNode<T> top2){
+ // Base case
+ if(top1 == null && top2 == null){
+ return true;
+ }
+ else if(top1 == null || top2 == null){
+ return false;
+ }
+ else if(top1.data.compareTo(top2.data) != 0){
+ return false;
+ }
+ // Recursion
+ else{
+ return isIdenticalTree(top1.left, top2.left) && isIdenticalTree(top1.right, top2.right);
+ }
+ }
+}
